@@ -35,10 +35,10 @@
 .EQU TIMER2_MAX_COUNT = 12    ; Motsvarar ca 200 ms fördröjning.
 
 .EQU RESET_vect        = 0x00 ; Reset-vektor, programmets startpunkt.
+.EQU PCINT0_vect = 0x06 ; Avbrottsvektor för PCI-avbrott på I/O-port B.
 .EQU TIMER0_OVF_vect   = 0x20 ; Avbrottsvektor för Timer 0 i Normal Mode.
 .EQU TIMER1_COMPA_vect = 0x16 ; Avbrottsvektor för Timer 1 i CTC Mode.
 .EQU TIMER2_OVF_vect = 0x12; Avbrottsvektor för Timer 2 i Normal Mode.
-.EQU PCINT0_vect = 0x06 ; Avbrottsvektor för PCI-avbrott på I/O-port B.
 
 ;********************************************************************************
 ; .DSEG: Dataminnet, här lagras statiska variabler. För att allokera minne för
@@ -52,6 +52,7 @@ counter0: .byte 1 ; static uint8_t counter0 = 0;
 counter1: .byte 1 ; static uint8_t counter1 = 0;
 counter2: .byte 1 ; static uint8_t counter2 = 0;
 
+
 ;********************************************************************************
 ; .CSEG: Programminnet - Här lagrar programkoden.
 ;********************************************************************************
@@ -64,8 +65,7 @@ counter2: .byte 1 ; static uint8_t counter2 = 0;
 .ORG RESET_vect
    RJMP main
 
-
-;/********************************************************************************
+ ;/********************************************************************************
 ;* PCINT0_vect: Avbrottsvektor för PCI-avbrott på I/O-port B, som äger rum vid
 ;*              nedtryckning eller uppsläppning av någon av tryckknapparna.
 ;*              Hopp sker till motsvarande avbrottsrutin ISR_PCINT0 för att
@@ -74,7 +74,6 @@ counter2: .byte 1 ; static uint8_t counter2 = 0;
 
 .ORG PCINT0_vect
    RJMP ISR_PCINT0
-
 ;/********************************************************************************
 ;* ISR_PCINT0: Avbrottsrutin för hantering av PCI-avbrott på I/O-port B, som
 ;*             äger rum vid nedtryckning eller uppsläppning av någon av 
@@ -184,7 +183,7 @@ ISR_TIMER1_COMPA_end:
 ;                 till dataminnet.
 ;********************************************************************************
 ISR_TIMER2_OVF:
-   LDS R24, counter2         
+   LDS R24, counter2        
    INC R24                  
    CPI R24, TIMER2_MAX_COUNT 
    BRLO ISR_TIMER2_OVF_end   
