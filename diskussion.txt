@@ -1,0 +1,18 @@
+1. Vad lärde ni er av projektet?
+
+Mycket om assembler, samt mer om hur timers fungerar.
+
+2. Vad var lätt/svårt?
+
+Den lätta delen var att vi i princip hade gjort det mesta som krävdes för att klara uppgiften på lektionerna.
+Det var dock lite svårt att komma ihåg att lägga allt i rätt ordning, så jag fick lite overlaps. Det var även
+lite svårt att få knapparna att funka, men det löste sig genom trial & error.
+
+
+3. Vad hade ni velat ha lärt er mer innan projektet?
+
+Hur man använder både timers och PCI - avbrott i samma kod, kände att man fick gissa sig framm lite.
+
+
+4. Övriga kommentarer?
+
